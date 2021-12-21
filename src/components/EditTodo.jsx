@@ -11,8 +11,10 @@ function EditTodo({ todo: { title, completed, id }, setVisible }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateTodo(id, editText);
-        setVisible(false);
+        if (editText) {
+            updateTodo(id, editText);
+            setVisible(false);
+        }
     };
 
     return (
@@ -20,7 +22,9 @@ function EditTodo({ todo: { title, completed, id }, setVisible }) {
             <div className="input-group">
                 <input
                     type="text"
-                    className="form-control rounded-0"
+                    className={`form-control rounded-0 ${
+                        editText ? '' : 'is-invalid'
+                    }`}
                     value={editText}
                     onChange={handleChange}
                 />
@@ -33,6 +37,7 @@ function EditTodo({ todo: { title, completed, id }, setVisible }) {
                 >
                     <i className="bi bi-x-lg"></i>
                 </button>
+                <div className="invalid-feedback">Please enter edit todo</div>
             </div>
         </form>
     );
