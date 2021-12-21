@@ -1,8 +1,8 @@
-function StatusFilter(props) {
-    const handleChange = (e) => {
-        const value = e.target.value;
-        props.setSearchStatus(!value ? value : value === 'true');
-    };
+import { useContext } from 'react';
+import { TodoListContext } from '../contexts/TodoListContext';
+function StatusFilter() {
+    const { setStatus } = useContext(TodoListContext);
+
     return (
         <div className="btn-group ms-3">
             <input
@@ -11,8 +11,8 @@ function StatusFilter(props) {
                 id="all"
                 name="status"
                 defaultChecked
-                onChange={handleChange}
-                value=""
+                // value=""
+                onChange={() => setStatus('')}
             />
             <label
                 className="btn btn-outline-secondary rounded-0"
@@ -26,7 +26,7 @@ function StatusFilter(props) {
                 id="done"
                 name="status"
                 value="true"
-                onChange={handleChange}
+                onChange={() => setStatus('true')}
             />
             <label
                 className="btn btn-outline-secondary rounded-0"
@@ -40,7 +40,7 @@ function StatusFilter(props) {
                 id="doing"
                 name="status"
                 value="false"
-                onChange={handleChange}
+                onChange={() => setStatus('false')}
             />
             <label
                 className="btn btn-outline-secondary rounded-0"
