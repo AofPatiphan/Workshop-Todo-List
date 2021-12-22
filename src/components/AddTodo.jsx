@@ -12,7 +12,7 @@ function AddTodo() {
         if (title.trim() === '') {
             return setError('Title is required.');
         }
-        addTodo({ title, completed: false });
+        addTodo({ title });
         setError('');
         setTitle('');
     };

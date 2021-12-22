@@ -4,29 +4,12 @@ import { TodoListContext } from '../contexts/TodoListContext';
 import axios from 'axios';
 
 function TodoItem({ todo: { title, completed, id } }) {
-    const { setTodoList, todoList, deleteTodo } = useContext(TodoListContext);
+    const { deleteTodo, status } = useContext(TodoListContext);
     const [visible, setVisible] = useState(false);
+    const [toggle, setToggle] = useState(false);
 
     const handleClickToggle = async () => {
-        const statusTodo = [...todoList];
-        const idx = statusTodo.findIndex((item) => item.id === id);
-        if (idx !== -1) {
-            statusTodo[idx] = {
-                ...statusTodo[idx],
-                ...{ completed: !statusTodo[idx].completed },
-            };
-            console.log(statusTodo[idx]);
-        }
-
-        try {
-            const res = await axios.put(
-                `http://localhost:8080/todos/${id}`,
-                statusTodo[idx]
-            );
-            setTodoList(statusTodo);
-        } catch (error) {
-            console.log(error.message);
-        }
+        status(completed, id);
     };
 
     return (
