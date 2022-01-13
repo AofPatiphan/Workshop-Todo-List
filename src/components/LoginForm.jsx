@@ -10,6 +10,8 @@ function LoginForm() {
         setPassword,
         error,
         handleSubmitLogin,
+        isLogin,
+        setIsLogin,
     } = useContext(AuthContext);
     return (
         <>

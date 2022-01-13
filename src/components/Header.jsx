@@ -5,23 +5,17 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import { Link } from 'react-router-dom';
 const Header = () => {
-    const {
-        setUsername,
-        password,
-        setPassword,
-        error,
-        setError,
-        handleSubmitLogin,
-    } = useContext(AuthContext);
+    const { account, setAccount, setIsLogin, isLogin } =
+        useContext(AuthContext);
 
     const navigate = useNavigate();
-    const { state } = useLocation();
-    console.log(state);
 
     const handleClick = (e) => {
         e.preventDefault();
         localStorage.clear('token');
         navigate('/login');
+        setAccount('');
+        setIsLogin(false);
     };
 
     return (
@@ -37,21 +31,17 @@ const Header = () => {
                                 Home
                             </Link>
                             <Link className="nav-link" to="/login" style={{}}>
-                                Login
+                                {isLogin ? '' : 'Login'}
                             </Link>
                             <Link
                                 className="nav-link"
                                 to="/register"
                                 style={{}}
                             >
-                                Register
+                                {isLogin ? '' : 'Register'}
                             </Link>
-                            <Link
-                                className="nav-link"
-                                to="/register"
-                                style={{}}
-                            >
-                                {state?.username}
+                            <Link className="nav-link" to="/" style={{}}>
+                                {account}
                             </Link>
 
                             <button

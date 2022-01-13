@@ -7,6 +7,8 @@ function AuthContextProvider(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
+    const [account, setAccount] = useState('');
 
     const navigate = useNavigate();
 
@@ -18,6 +20,10 @@ function AuthContextProvider(props) {
                 console.log(res.data);
                 localStorage.setItem('token', res.data.token); // เก็บค่าไว้ใน local
                 navigate('/', { replace: false, state: { username } });
+                setIsLogin(true);
+                setAccount(username);
+                setUsername('');
+                setPassword('');
             })
             .catch((err) => {
                 console.log(err);
@@ -35,6 +41,10 @@ function AuthContextProvider(props) {
                 error,
                 setError,
                 handleSubmitLogin,
+                isLogin,
+                setIsLogin,
+                account,
+                setAccount,
             }}
         >
             {props.children}

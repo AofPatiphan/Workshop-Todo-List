@@ -5,9 +5,7 @@ import AuthContextProvider from '../contexts/AuthContext';
 function Login() {
     return (
         <>
-            <AuthContextProvider>
-                <LoginForm />
-            </AuthContextProvider>
+            <LoginForm />
         </>
     );
 }
